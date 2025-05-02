@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="assets/logo-furb-ico.png" type="image" sizes="16x16" />
+    <title>
+        Gerenciador de Imagens
+    </title>
+</head>
+
+<body class="min-h-screen flex flex-col bg-blue-50 justify-center items-center">
+    <!-- header -->
+    <header
+        class="w-full h-24 bg-blue-900 text-yellow-400 flex items-center justify-center text-2xl sm:text-4xl font-bold">
+        <img src="assets/logo-furb.png" class="w-auto h-20 " />
+        Gerenciador De Imagens - FURB
+    </header>
+
+    <!-- formulario -->
+    <main class="w-full max-w-2xl bg-yellow-200 p-6 sm:p-8 rounded-md border-4 border-blue-900 shadow-xl mt-8 mx-4">
+        <form id="formularioFoto" class="flex flex-col space-y-4">
+            <div class="flex flex-col">
+                <label for="acao" class="text-sm font-medium text-blue-900">O que deseja fazer?</label>
+                <select id="acao" name="acao"
+                    class="w-full p-2 bg-white rounded-md outline-none mt-1 border-2 border-blue-900">
+                    <option value="inserir">Inserir</option>
+                    <option value="listar">Listar</option>
+                    <option value="alterar">Alterar</option>
+                    <option value="excluir">Excluir</option>
+                </select>
+            </div>
+
+            <!-- campos do formulario -->
+            <div class="flex flex-col space-y-4">
+                <div class="flex flex-col">
+                    <label for="id" class="text-sm font-medium text-blue-900">ID</label>
+                    <input type="text" name="id" id="id" placeholder="ID (para alterar/excluir)"
+                        class="w-full p-2 bg-white rounded-md outline-none mt-1 border-2 border-blue-900">
+                </div>
+                <div class="flex flex-col">
+                    <label for="titulo" class="text-sm font-medium text-blue-900">Título da Foto</label>
+                    <input type="text" name="titulo" id="titulo" placeholder="Digite o título da foto"
+                        class="w-full p-2 bg-white rounded-md outline-none mt-1 border-2 border-blue-900">
+                </div>
+                <div class="flex flex-col sm:flex-row sm:space-x-4">
+                    <div class="flex flex-col flex-1">
+                        <label for="urlImagem" class="text-sm font-medium text-blue-900">URL da Imagem</label>
+                        <input type="url" name="urlImagem" id="urlImagem" placeholder="Digite a URL da imagem"
+                            class="w-full p-2 bg-white rounded-md outline-none mt-1 border-2 border-blue-900">
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <label for="urlMiniatura" class="text-sm font-medium text-blue-900">URL da Miniatura</label>
+                        <input type="url" name="urlMiniatura" id="urlMiniatura" placeholder="Digite a URL da miniatura"
+                            class="w-full p-2 bg-white rounded-md outline-none mt-1 border-2 border-blue-900">
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <label for="idAlbum" class="text-sm font-medium text-blue-900">ID do Álbum</label>
+                    <input type="number" name="idAlbum" id="idAlbum" placeholder="Digite o ID do álbum"
+                        class="w-full p-2 bg-white rounded-md outline-none mt-1 border-2 border-blue-900">
+                </div>
+            </div>
+            <button type="button" id="botaoAcao"
+                class="w-full p-2 bg-blue-900 text-white rounded-md hover:bg-yellow-400 hover:text-blue-900 font-bold border-2 border-blue-900">
+                Inserir
+            </button>
+        </form>
+    </main>
+
+    <!-- Listagem de Fotos -->
+    <section id="secaoListagem"
+        class="w-full max-w-2xl bg-blue-200 p-6 sm:p-8 rounded-md border-4 border-yellow-400 shadow-xl mt-8 mx-4">
+        <h2 class="text-xl font-semibold text-blue-900 mb-4">Listagem de Fotos</h2>
+        <div class="overflow-x-auto">
+            <table id="tabelaFotos" class="w-full bg-white rounded-md border-2 border-blue-900">
+                <thead>
+                    <tr class="bg-blue-900 text-yellow-400">
+                        <th class="p-2">ID</th>
+                        <th class="p-2">Título</th>
+                        <th class="p-2">Album ID</th>
+                        <th class="p-2">Imagem</th>
+                        <th class="p-2">Miniatura</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- dados do js -->
+                </tbody>
+            </table>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:justify-between items-center mt-4 space-y-2 sm:space-y-0 sm:space-x-2">
+            <button id="botaoPrimeira"
+                class="p-2 bg-yellow-400 text-blue-900 rounded-md hover:bg-blue-900 hover:text-yellow-400 w-full sm:w-auto">
+                Primeira
+            </button>
+            <button id="botaoAnterior"
+                class="p-2 bg-yellow-400 text-blue-900 rounded-md hover:bg-blue-900 hover:text-yellow-400 w-full sm:w-auto">
+                Anterior
+            </button>
+            <span id="infoPagina" class="text-sm text-blue-900 text-center w-full sm:w-auto">Página 1 de 100</span>
+            <input type="number" id="inputPagina"
+                class="p-2 w-full sm:w-20 text-center rounded-md outline-none border-2 border-blue-900" min="1"
+                max="100" placeholder="Página">
+            <button id="botaoIrParaPagina"
+                class="p-2 bg-yellow-400 text-blue-900 rounded-md hover:bg-blue-900 hover:text-yellow-400 w-full sm:w-auto">
+                Ir
+            </button>
+            <button id="botaoProximo"
+                class="p-2 bg-yellow-400 text-blue-900 rounded-md hover:bg-blue-900 hover:text-yellow-400 w-full sm:w-auto">
+                Próxima
+            </button>
+            <button id="botaoUltima"
+                class="p-2 bg-yellow-400 text-blue-900 rounded-md hover:bg-blue-900 hover:text-yellow-400 w-full sm:w-auto">
+                Última
+            </button>
+        </div>
+    </section>
+
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
